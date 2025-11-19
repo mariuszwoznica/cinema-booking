@@ -1,0 +1,34 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CinemaBooking.Bootstrapper/CinemaBooking.Bootstrapper.csproj" />
+  </Folder>
+  <Folder Name="/src/Common/">
+    <Project Path="src/Common/CinemaBooking.Common.Abstractions/CinemaBooking.Common.Abstractions.csproj" />
+    <Project Path="src/Common/CinemaBooking.Common.Infrastructure/CinemaBooking.Common.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Booking/">
+    <Project Path="src/Modules/Booking/CinemaBooking.Modules.Booking.Api/CinemaBooking.Modules.Booking.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Cinemas/">
+    <Project Path="src/Modules/Cinemas/CinemaBooking.Modules.Cinemas.Api/CinemaBooking.Modules.Cinemas.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Movies/">
+    <Project Path="src/Modules/Movies/CinemaBooking.Modules.Movies.Api/CinemaBooking.Modules.Movies.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Notifications/">
+    <Project Path="src/Modules/Notifications/CinemaBooking.Modules.Notifications.Api/CinemaBooking.Modules.Notifications.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Payments/">
+    <Project Path="src/Modules/Payments/CinemaBooking.Modules.Payments.Api/CinemaBooking.Modules.Payments.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Pricing/">
+    <Project Path="src/Modules/Pricing/CinemaBooking.Modules.Pricing.Api/CinemaBooking.Modules.Pricing.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/ShowTime/">
+    <Project Path="src/Modules/ShowTime/CinemaBooking.Modules.ShowTime.Api/CinemaBooking.Modules.ShowTime.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Users/">
+    <Project Path="src/Modules/Users/CinemaBooking.Modules.Users.Api/CinemaBooking.Modules.Users.Api.csproj" />
+  </Folder>
+</Solution>
