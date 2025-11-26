@@ -1,4 +1,4 @@
-﻿namespace CinemaBooking.Common.Abstractions.Messaging;
+﻿namespace CinemaBooking.Common.Abstractions.Queries;
 
 /// <summary>
 /// Defines a handler for a query.

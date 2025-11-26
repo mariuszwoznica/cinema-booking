@@ -1,4 +1,7 @@
-﻿namespace CinemaBooking.Common.Abstractions.Messaging;
+﻿using CinemaBooking.Common.Abstractions.Commands;
+using CinemaBooking.Common.Abstractions.Queries;
+
+namespace CinemaBooking.Common.Abstractions.Dispatchers;
 
 /// <summary>
 /// Dispatcher delivers commands and queries to the appropriate handler.

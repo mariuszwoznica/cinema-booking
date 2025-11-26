@@ -1,4 +1,4 @@
-﻿namespace CinemaBooking.Common.Abstractions.Messaging;
+﻿namespace CinemaBooking.Common.Abstractions.Commands;
 
 /// <summary>
 /// Defines a handler for a command.
