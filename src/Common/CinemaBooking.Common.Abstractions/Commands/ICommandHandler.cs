@@ -4,8 +4,7 @@
 /// Defines a handler for a command.
 /// </summary>
 /// <typeparam name="TCommand">The type of command</typeparam>
-public interface ICommandHandler<in TCommand> 
-    where TCommand : class, ICommand
+public interface ICommandHandler<in TCommand> where TCommand : class, ICommand
 {
     /// <summary>
     /// Handles a command.
