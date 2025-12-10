@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <ProjectReference Include="..\Common\CinemaBooking.Common.Abstractions\CinemaBooking.Common.Abstractions.csproj" />
+    <ProjectReference Include="..\Common\CinemaBooking.Common.Infrastructure\CinemaBooking.Common.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
   </ItemGroup>
 
 </Project>
