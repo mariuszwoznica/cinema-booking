@@ -12,6 +12,7 @@
   </Folder>
   <Folder Name="/src/Modules/Cinemas/">
     <Project Path="src/Modules/Cinemas/CinemaBooking.Modules.Cinemas.Api/CinemaBooking.Modules.Cinemas.Api.csproj" />
+    <Project Path="src/Modules/Cinemas/CinemaBooking.Modules.Cinemas.Core/CinemaBooking.Modules.Cinemas.Core.csproj" />
   </Folder>
   <Folder Name="/src/Modules/Movies/">
     <Project Path="src/Modules/Movies/CinemaBooking.Modules.Movies.Api/CinemaBooking.Modules.Movies.Api.csproj" />
