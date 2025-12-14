@@ -1,7 +1,7 @@
 ﻿namespace CinemaBooking.Common.Abstractions.Exceptions;
 
 /// <summary>
-/// Base class to represent all domain exceptions.
+/// Base class to represent domain exceptions in the system.
 /// </summary>
 public abstract class CinemaBookingException : Exception
 {
