@@ -1,8 +1,9 @@
-﻿namespace CinemaBooking.Modules.Cinemas.Core.Entities;
+﻿using CinemaBooking.Common.Abstractions.Entities;
 
-internal class Seat
+namespace CinemaBooking.Modules.Cinemas.Core.Entities;
+
+internal class Seat : Entity
 {
-    public Guid Id { get; private set; }
     public string Row { get; private set; }
     public int Number { get; private set; }
     public SeatType Type { get; private set; }

@@ -1,8 +1,9 @@
-﻿namespace CinemaBooking.Modules.Cinemas.Core.Entities;
+﻿using CinemaBooking.Common.Abstractions.Entities;
 
-internal class Screen
+namespace CinemaBooking.Modules.Cinemas.Core.Entities;
+
+internal class Screen : Entity
 {
-    public Guid Id { get; private set; }
     public string Name { get; private set; }
     public IEnumerable<Seat> Seats { get; private set; }
 

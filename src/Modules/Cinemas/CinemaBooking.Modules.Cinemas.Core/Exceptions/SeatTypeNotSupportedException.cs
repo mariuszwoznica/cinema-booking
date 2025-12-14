@@ -1,10 +1,14 @@
-﻿namespace CinemaBooking.Modules.Cinemas.Core.Exceptions;
+﻿using CinemaBooking.Common.Abstractions.Exceptions;
 
-internal class SeatTypeNotSupportedException : Exception
+namespace CinemaBooking.Modules.Cinemas.Core.Exceptions;
+
+internal class SeatTypeNotSupportedException : CinemaBookingException
 {
     public string Value { get; }
 
     public SeatTypeNotSupportedException(string value)
-        : base($"Seat type {value} is not supported.")
-        => Value = value;
+        : base($"Seat type '{value}' is not supported.")
+    {
+        Value = value;
+    }
 }
