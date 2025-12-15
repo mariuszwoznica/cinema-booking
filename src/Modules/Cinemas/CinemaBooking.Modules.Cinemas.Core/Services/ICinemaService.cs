@@ -4,8 +4,8 @@ namespace CinemaBooking.Modules.Cinemas.Core.Services;
 
 public interface ICinemaService
 {
-    Task<CinemaDto> GetByIdAsync(Guid id);
-    Task CreateAsync(CinemaDto cinema);
-    Task UpdateAsync(CinemaDto cinema);
-    Task DeleteAsync(Guid id);
+    Task<CinemaDto> GetAsync(Guid id,  CancellationToken cancellationToken);
+    Task CreateAsync(CinemaDto dto, CancellationToken cancellationToken);
+    Task UpdateAsync(CinemaDto dto, CancellationToken cancellationToken);
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

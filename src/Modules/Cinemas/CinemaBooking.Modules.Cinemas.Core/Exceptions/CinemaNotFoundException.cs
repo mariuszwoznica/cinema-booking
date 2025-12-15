@@ -2,7 +2,7 @@
 
 namespace CinemaBooking.Modules.Cinemas.Core.Exceptions;
 
-public class CinemaNotFoundException : CinemaBookingException
+internal class CinemaNotFoundException : CinemaBookingException
 {
     public Guid Id { get; }
 
