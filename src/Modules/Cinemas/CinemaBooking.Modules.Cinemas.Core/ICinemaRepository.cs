@@ -8,5 +8,5 @@ internal interface ICinemaRepository
     Task<Cinema> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task CreateAsync(Cinema cinema, CancellationToken cancellationToken);
     Task UpdateAsync(Cinema cinema, CancellationToken cancellationToken);
-    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+    Task DeleteAsync(Cinema cinema, CancellationToken cancellationToken);
 }

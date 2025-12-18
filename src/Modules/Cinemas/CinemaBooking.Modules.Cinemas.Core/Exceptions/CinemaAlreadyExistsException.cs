@@ -4,11 +4,11 @@ namespace CinemaBooking.Modules.Cinemas.Core.Exceptions;
 
 internal class CinemaAlreadyExistsException  : CinemaBookingException
 {
-    public Guid Id { get; }
+    public string Name { get; }
 
-    public CinemaAlreadyExistsException(Guid id)
-        : base($"Cinema with id: '{id}' already exists.")
+    public CinemaAlreadyExistsException(string name)
+        : base($"Cinema with name: '{name}' already exists.")
     {
-        Id = id;
+        Name = name;
     }
 }
