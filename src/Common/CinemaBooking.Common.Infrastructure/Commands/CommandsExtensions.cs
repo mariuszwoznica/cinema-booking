@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CinemaBooking.Common.Infrastructure.Commands;
 
-internal static class Extensions
+internal static class CommandsExtensions
 {
     public static IServiceCollection AddCommands(this IServiceCollection services)
     {
