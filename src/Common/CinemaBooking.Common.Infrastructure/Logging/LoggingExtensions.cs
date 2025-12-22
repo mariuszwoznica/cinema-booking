@@ -7,7 +7,7 @@ using Serilog;
 
 namespace CinemaBooking.Common.Infrastructure.Logging;
 
-public static class Extensions
+public static class LoggingExtensions
 {
     public static IServiceCollection AddLoggingDecorators(this IServiceCollection services)
     {

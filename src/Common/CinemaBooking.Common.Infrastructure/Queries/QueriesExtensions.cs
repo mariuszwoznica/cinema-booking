@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CinemaBooking.Common.Infrastructure.Queries;
 
-internal static class Extensions
+internal static class QueriesExtensions
 {
     public static IServiceCollection AddQueries(this IServiceCollection services)
     {
