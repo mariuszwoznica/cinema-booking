@@ -5,6 +5,8 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data;
 
 internal sealed class CinemasDbContext : DbContext
 {
+    private const string Schema = "cinemas";
+    
     internal DbSet<Cinema> Cinemas { get; set; }
     internal DbSet<Screen> Screens { get; set; }
     internal DbSet<Seat> Seats { get; set; }
@@ -15,8 +17,8 @@ internal sealed class CinemasDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("cinemas");
-
+        modelBuilder.HasDefaultSchema(Schema);
+        
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
     }
 }

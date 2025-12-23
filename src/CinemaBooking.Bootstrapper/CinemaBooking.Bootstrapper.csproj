@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\CinemaBooking.Common.Abstractions\CinemaBooking.Common.Abstractions.csproj" />
     <ProjectReference Include="..\Common\CinemaBooking.Common.Infrastructure\CinemaBooking.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Cinemas\CinemaBooking.Modules.Cinemas.Api\CinemaBooking.Modules.Cinemas.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>

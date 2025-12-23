@@ -6,7 +6,7 @@ using SeatTypeDto = CinemaBooking.Modules.Cinemas.Core.DTOs.SeatType;
 
 namespace CinemaBooking.Modules.Cinemas.Core;
 
-internal static class Extensions
+internal static class MappingExtensions
 {
     internal static CinemaDto ToDto(this Cinema cinema)
         => new(
