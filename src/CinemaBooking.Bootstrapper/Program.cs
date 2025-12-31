@@ -18,8 +18,11 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
 app.UseInfrastructure();
 
 app.UseHttpsRedirection();
+
+app.UseCinemasModule();
 
 app.Run();
