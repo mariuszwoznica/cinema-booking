@@ -4,12 +4,14 @@ using CinemaBooking.Modules.Cinemas.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+
 builder.Host.UseLogging();
 
 builder.Services.AddOpenApi();
 
 builder.Services
-    .AddInfrastructure(builder.Configuration)
+    .AddInfrastructure(builder.Configuration, assemblies)
     .AddCinemasModule();
 
 var app = builder.Build();
