@@ -16,7 +16,9 @@ public static class ValidationExtensions
             .ProducesValidationProblem();
     }
 
-    public static IServiceCollection AddFluentValidation(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+    public static IServiceCollection AddFluentValidation(
+        this IServiceCollection services, 
+        IEnumerable<Assembly> assemblies)
     {
         services.AddValidatorsFromAssemblies(assemblies);
 

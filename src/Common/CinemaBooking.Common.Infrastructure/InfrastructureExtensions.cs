@@ -13,12 +13,12 @@ namespace CinemaBooking.Common.Infrastructure;
 public static class InfrastructureExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services,
-        IConfiguration configuration, IEnumerable<Assembly> assemblies)
+        IConfiguration configuration, IList<Assembly> assemblies)
     {
         services
             .AddFluentValidation(assemblies)
-            .AddCommands()
-            .AddQueries()
+            .AddCommands(assemblies)
+            .AddQueries(assemblies)
             .AddLoggingDecorators()
             .AddPostgresDatabase(configuration);
 
