@@ -3,10 +3,12 @@ using CinemaBooking.Common.Infrastructure.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
 builder.Host.UseLogging();
 
 builder.Services.AddOpenApi();
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration, assemblies);
 
 var app = builder.Build();
 

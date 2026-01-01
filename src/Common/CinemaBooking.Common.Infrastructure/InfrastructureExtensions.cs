@@ -1,7 +1,9 @@
-﻿using CinemaBooking.Common.Infrastructure.Commands;
+﻿using System.Reflection;
+using CinemaBooking.Common.Infrastructure.Commands;
 using CinemaBooking.Common.Infrastructure.Database;
 using CinemaBooking.Common.Infrastructure.Logging;
 using CinemaBooking.Common.Infrastructure.Queries;
+using CinemaBooking.Common.Infrastructure.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +13,10 @@ namespace CinemaBooking.Common.Infrastructure;
 public static class InfrastructureExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services,
-        IConfiguration configuration)
+        IConfiguration configuration, IEnumerable<Assembly> assemblies)
     {
         services
+            .AddFluentValidation(assemblies)
             .AddCommands()
             .AddQueries()
             .AddLoggingDecorators()
