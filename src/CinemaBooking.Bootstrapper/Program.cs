@@ -1,9 +1,10 @@
 using CinemaBooking.Common.Infrastructure;
 using CinemaBooking.Common.Infrastructure.Logging;
+using CinemaBooking.Common.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+var assemblies = ModuleLoader.LoadAssemblies();
 
 builder.Host.UseLogging();
 
