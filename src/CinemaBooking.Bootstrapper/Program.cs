@@ -25,4 +25,6 @@ app.UseInfrastructure();
 
 app.UseHttpsRedirection();
 
+app.UseCinemasModule();
+
 app.Run();
