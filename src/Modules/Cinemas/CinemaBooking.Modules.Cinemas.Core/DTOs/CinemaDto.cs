@@ -4,4 +4,4 @@ public record CinemaDto(
        Guid Id,
        string Name,
        AddressDto Address,
-       IEnumerable<ScreenDto> Screens);
+       IEnumerable<ScreenDto>? Screens);

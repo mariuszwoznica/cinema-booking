@@ -1,4 +1,5 @@
-﻿using CinemaBooking.Modules.Cinemas.Core.DTOs;
+﻿using CinemaBooking.Common.Infrastructure.Validation;
+using CinemaBooking.Modules.Cinemas.Core.DTOs;
 using CinemaBooking.Modules.Cinemas.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -14,8 +15,13 @@ public static class CinemasEndpoints
         var endpoints = app.MapGroup("/cinemas");
         
         endpoints.MapGet("/{cinemaId:guid}", GetCinema);
-        endpoints.MapPost("/", CreateCinema);
-        endpoints.MapPut("/{cinemaId:guid}", UpdateCinema);
+
+        endpoints.MapPost("/", CreateCinema)
+            .WithRequestValidation<CinemaDto>();
+        
+        endpoints.MapPut("/{cinemaId:guid}", UpdateCinema)
+            .WithRequestValidation<CinemaDto>();
+        
         endpoints.MapDelete("/{cinemaId:guid}",  DeleteCinema);
     }
     
