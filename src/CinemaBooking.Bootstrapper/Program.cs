@@ -1,10 +1,11 @@
 using CinemaBooking.Common.Infrastructure;
 using CinemaBooking.Common.Infrastructure.Logging;
 using CinemaBooking.Modules.Cinemas.Api;
+using CinemaBooking.Common.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+var assemblies = ModuleLoader.LoadAssemblies();
 
 builder.Host.UseLogging();
 
@@ -20,11 +21,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
 app.UseInfrastructure();
 
 app.UseHttpsRedirection();
-
-app.UseCinemasModule();
 
 app.Run();

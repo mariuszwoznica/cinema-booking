@@ -20,7 +20,7 @@ public static class ValidationExtensions
         this IServiceCollection services, 
         IEnumerable<Assembly> assemblies)
     {
-        services.AddValidatorsFromAssemblies(assemblies);
+        services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true);
 
         return services;
     }
