@@ -7,7 +7,7 @@ namespace CinemaBooking.Common.Infrastructure.Database;
 
 public static class DatabaseExtensions
 {
-    public static IServiceCollection AddPostgresDatabase<TDbContext>(this IServiceCollection services)
+    public static IServiceCollection AddPostgres<TDbContext>(this IServiceCollection services)
         where TDbContext : DbContext
     {
         services.AddDbContext<TDbContext>((serviceProvider, options) =>
@@ -22,7 +22,7 @@ public static class DatabaseExtensions
         return services;
     }
 
-    public static IServiceCollection AddPostgresDatabase(this IServiceCollection services,
+    public static IServiceCollection AddPostgres(this IServiceCollection services,
         IConfiguration configuration)
     {
         services

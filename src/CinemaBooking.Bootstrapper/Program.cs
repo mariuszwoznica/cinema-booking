@@ -9,7 +9,7 @@ var assemblies = ModuleLoader.LoadAssemblies();
 builder.Host.UseLogging();
 
 builder.Services.AddOpenApi();
-builder.Services.AddInfrastructure(builder.Configuration, assemblies);
+builder.Services.AddCommonInfrastructure(builder.Configuration, assemblies);
 
 var app = builder.Build();
 
@@ -17,7 +17,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-app.UseInfrastructure();
+app.UseCommonInfrastructure();
 
 app.UseHttpsRedirection();
 
