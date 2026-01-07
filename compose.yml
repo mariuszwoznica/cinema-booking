@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:18.1
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=cinemabooking
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - postgresdata:/var/lib/postgresql
+         
+volumes:
+  postgresdata:
