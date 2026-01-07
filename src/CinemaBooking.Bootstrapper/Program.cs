@@ -12,7 +12,7 @@ builder.Host.UseLogging();
 builder.Services.AddOpenApi();
 
 builder.Services
-    .AddInfrastructure(builder.Configuration, assemblies)
+    .AddCommonInfrastructure(builder.Configuration, assemblies)
     .AddCinemasModule();
 
 var app = builder.Build();
@@ -21,7 +21,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-app.UseInfrastructure();
+app.UseCommonInfrastructure();
 
 app.UseHttpsRedirection();
 

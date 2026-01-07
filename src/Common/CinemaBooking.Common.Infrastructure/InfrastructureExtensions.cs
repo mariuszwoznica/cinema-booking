@@ -12,7 +12,7 @@ namespace CinemaBooking.Common.Infrastructure;
 
 public static class InfrastructureExtensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services,
+    public static IServiceCollection AddCommonInfrastructure(this IServiceCollection services,
         IConfiguration configuration, IList<Assembly> assemblies)
     {
         services
@@ -20,12 +20,12 @@ public static class InfrastructureExtensions
             .AddCommands(assemblies)
             .AddQueries(assemblies)
             .AddLoggingDecorators()
-            .AddPostgresDatabase(configuration);
+            .AddPostgres(configuration);
 
         return services;
     }
 
-    public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
+    public static IApplicationBuilder UseCommonInfrastructure(this IApplicationBuilder app)
     {
         app.UseSwaggerUI(options =>
         {

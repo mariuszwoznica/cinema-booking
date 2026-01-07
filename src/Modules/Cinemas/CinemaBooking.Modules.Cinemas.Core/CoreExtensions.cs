@@ -11,7 +11,7 @@ public static class CoreExtensions
     public static IServiceCollection AddCore(this IServiceCollection services)
     {
         services
-            .AddPostgresDatabase<CinemasDbContext>()
+            .AddPostgres<CinemasDbContext>()
             .AddScoped<ICinemaRepository, CinemaRepository>()
             .AddScoped<ICinemaService, CinemaService>();
         
