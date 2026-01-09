@@ -5,7 +5,7 @@ using CinemaBooking.Common.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var assemblies = ModuleLoader.LoadAssemblies();
+var assemblies = ModuleLoader.LoadAssemblies("CinemaBooking.Modules");
 
 builder.Host.UseLogging();
 
