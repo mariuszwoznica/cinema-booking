@@ -1,6 +1,5 @@
 ﻿using CinemaBooking.Common.Infrastructure.Database;
 using CinemaBooking.Modules.Cinemas.Core.Data;
-using CinemaBooking.Modules.Cinemas.Core.Data.Repositories;
 using CinemaBooking.Modules.Cinemas.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 

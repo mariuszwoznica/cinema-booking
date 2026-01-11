@@ -3,13 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CinemaBooking.Modules.Cinemas.Core.Data;
 
-internal sealed class CinemasDbContext : DbContext
+internal class CinemasDbContext : DbContext
 {
     private const string Schema = "cinemas";
-    
+
     internal DbSet<Cinema> Cinemas { get; set; }
-    internal DbSet<Screen> Screens { get; set; }
-    internal DbSet<Seat> Seats { get; set; }
 
     public CinemasDbContext(DbContextOptions<CinemasDbContext> options) : base(options)
     {
@@ -19,6 +17,6 @@ internal sealed class CinemasDbContext : DbContext
     {
         modelBuilder.HasDefaultSchema(Schema);
         
-        modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        modelBuilder.ApplyConfiguration(new CinemaConfiguration());
     }
 }

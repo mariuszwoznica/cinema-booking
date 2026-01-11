@@ -6,13 +6,18 @@ internal class Cinema : Entity
 {
     public string Name { get; private set; }
     public Address Address { get; private set; }
-    public IEnumerable<Screen> Screens { get; private set; }
+    public List<Screen> Screens { get; private set; }
+
+    //Only for Ef purpose
+    public Cinema()
+    {
+    }
 
     internal Cinema(string name, Address address, IEnumerable<Screen> screens)
     {
         Id = Guid.NewGuid();
         Name = name;
         Address = address;
-        Screens = screens;
+        Screens = screens.ToList();
     }
 }

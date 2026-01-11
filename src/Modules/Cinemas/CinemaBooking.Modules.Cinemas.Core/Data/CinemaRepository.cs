@@ -2,7 +2,7 @@
 using CinemaBooking.Modules.Cinemas.Core.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaBooking.Modules.Cinemas.Core.Data.Repositories;
+namespace CinemaBooking.Modules.Cinemas.Core.Data;
 
 internal class CinemaRepository(CinemasDbContext context) : ICinemaRepository
 {
