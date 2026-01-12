@@ -70,8 +70,6 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data.Migrations
                                         .IsRequired();
 
                                     b2.Property<int>("Type");
-
-                                    b2.ToJson("Seats");
                                 });
 
                             b1.ToJson("Screens");
@@ -79,7 +77,7 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas", "cinemas");
+                    b.ToTable("cinemas", "cinemas");
                 });
 #pragma warning restore 612, 618
         }

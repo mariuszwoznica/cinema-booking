@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CinemaBooking.Modules.Cinemas.Core.Data.Migrations
 {
     [DbContext(typeof(CinemasDbContext))]
-    [Migration("20260111172403_AddCinemas")]
+    [Migration("20260112120816_AddCinemas")]
     partial class AddCinemas
     {
         /// <inheritdoc />
@@ -73,8 +73,6 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data.Migrations
                                         .IsRequired();
 
                                     b2.Property<int>("Type");
-
-                                    b2.ToJson("Seats");
                                 });
 
                             b1.ToJson("Screens");
@@ -82,7 +80,7 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas", "cinemas");
+                    b.ToTable("cinemas", "cinemas");
                 });
 #pragma warning restore 612, 618
         }

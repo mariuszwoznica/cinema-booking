@@ -15,7 +15,7 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data.Migrations
                 name: "cinemas");
 
             migrationBuilder.CreateTable(
-                name: "Cinemas",
+                name: "cinemas",
                 schema: "cinemas",
                 columns: table => new
                 {
@@ -26,7 +26,7 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cinemas", x => x.Id);
+                    table.PrimaryKey("PK_cinemas", x => x.Id);
                 });
         }
 
@@ -34,7 +34,7 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cinemas",
+                name: "cinemas",
                 schema: "cinemas");
         }
     }

@@ -8,6 +8,10 @@ internal class CinemaConfiguration : IEntityTypeConfiguration<Cinema>
 {
     public void Configure(EntityTypeBuilder<Cinema> builder)
     {
+        builder.ToTable("cinemas");
+        
+        builder.HasKey(c => c.Id);
+        
         builder.Property(c => c.Id)
             .ValueGeneratedNever()
             .IsRequired();
@@ -22,15 +26,11 @@ internal class CinemaConfiguration : IEntityTypeConfiguration<Cinema>
 
             address.ToJson();
         });
-        
+
         builder.ComplexCollection(c => c.Screens, screens =>
         {
-            screens.Property(s => s.Name).IsRequired();
-            screens.ComplexCollection(s => s.Seats, seats =>
-            {
-                seats.ToJson();
-            });
-            
+            screens.ComplexCollection(s => s.Seats);
+
             screens.ToJson();
         });
     }
