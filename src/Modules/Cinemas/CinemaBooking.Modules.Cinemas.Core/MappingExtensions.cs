@@ -26,14 +26,14 @@ internal static class MappingExtensions
                     Type: seat.Type.ToDto()))))
             );
 
-    internal static Cinema ToEntity(this CinemaDto dto)
+    internal static Cinema ToEntity(this CinemaRequest request)
         => new(
-            name: dto.Name,
+            name: request.Name,
             address: new Address(
-                Street: dto.Address.Street,
-                City: dto.Address.City,
-                ZipCode: dto.Address.ZipCode),
-            screens: dto.Screens.Select(screen => new Screen(
+                Street: request.Address.Street,
+                City: request.Address.City,
+                ZipCode: request.Address.ZipCode),
+            screens: request.Screens.Select(screen => new Screen(
                 name: screen.Name,
                 seats: screen.Seats.Select(seat => new Seat(
                     row: seat.Row,

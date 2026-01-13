@@ -1,5 +1,4 @@
-﻿using CinemaBooking.Modules.Cinemas.Api.Endpoints;
-using CinemaBooking.Modules.Cinemas.Core;
+﻿using CinemaBooking.Modules.Cinemas.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 

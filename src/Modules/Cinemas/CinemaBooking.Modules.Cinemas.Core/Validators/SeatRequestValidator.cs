@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace CinemaBooking.Modules.Cinemas.Core.Validators;
 
-internal class SeatDtoValidator : AbstractValidator<SeatDto>
+internal class SeatRequestValidator : AbstractValidator<SeatRequest>
 {
-    public SeatDtoValidator()
+    public SeatRequestValidator()
     {
         RuleFor(s => s.Row)
             .NotEmpty()

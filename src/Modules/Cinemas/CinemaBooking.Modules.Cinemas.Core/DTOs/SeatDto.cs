@@ -5,7 +5,7 @@ public record SeatDto(
     string Row,
     int Number,
     SeatType Type);
-    
+
 public enum SeatType
 {
     Vip = 1,

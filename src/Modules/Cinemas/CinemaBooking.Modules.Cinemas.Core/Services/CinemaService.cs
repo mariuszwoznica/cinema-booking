@@ -11,24 +11,25 @@ internal class CinemaService(ICinemaRepository repository) : ICinemaService
         return cinema.ToDto();
     }
 
-    public async Task CreateAsync(CinemaDto dto, CancellationToken cancellationToken)
+    public async Task<CinemaDto> CreateAsync(CinemaRequest request, CancellationToken cancellationToken)
     {
-        var cinemaExists = await repository.ExistsAsync(dto.Name, cancellationToken);
+        var cinemaExists = await repository.ExistsAsync(request.Name, cancellationToken);
         if (cinemaExists)
         {
-            throw new CinemaAlreadyExistsException(dto.Name);
+            throw new CinemaAlreadyExistsException(request.Name);
         }
 
-        var cinema = dto.ToEntity();
+        var cinema = request.ToEntity();
         await repository.CreateAsync(cinema, cancellationToken);
+        return cinema.ToDto();
     }
 
-    public async Task UpdateAsync(CinemaDto dto, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Guid id, CinemaRequest request, CancellationToken cancellationToken)
     {
-        var cinema = await repository.GetByIdAsync(dto.Id, cancellationToken);
+        var cinema = await repository.GetByIdAsync(id, cancellationToken);
         
         //TODO: call update method from entity class
-        await repository.UpdateAsync(dto.ToEntity(), cancellationToken);
+        await repository.UpdateAsync(request.ToEntity(), cancellationToken);
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
