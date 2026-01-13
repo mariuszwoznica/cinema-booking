@@ -29,6 +29,7 @@ internal class CinemaRepository(CinemasDbContext context) : ICinemaRepository
         await context.SaveChangesAsync(cancellationToken);
     }
 
+    //TODO: https://github.com/dotnet/efcore/issues/37373
     public async Task DeleteAsync(Cinema cinema, CancellationToken cancellationToken)
     {
         context.Cinemas.Remove(cinema);
