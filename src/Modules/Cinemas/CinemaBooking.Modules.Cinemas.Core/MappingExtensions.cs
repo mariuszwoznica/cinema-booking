@@ -24,15 +24,19 @@ internal static class MappingExtensions
                     Row: seat.Row,
                     Number: seat.Number,
                     Type: seat.Type.ToDto()))))
-            );
+        );
 
-    internal static Cinema ToEntity(this CinemaRequest request)
+    internal static Address ToEntity(this AddressDto address)
+        => new(
+            Street: address.Street,
+            City: address.City,
+            ZipCode: address.ZipCode
+        );
+
+    internal static Cinema ToEntity(this CinemaCreateRequest request)
         => new(
             name: request.Name,
-            address: new Address(
-                Street: request.Address.Street,
-                City: request.Address.City,
-                ZipCode: request.Address.ZipCode),
+            address: request.Address.ToEntity(),
             screens: request.Screens.Select(screen => new Screen(
                 name: screen.Name,
                 seats: screen.Seats.Select(seat => new Seat(
@@ -40,6 +44,31 @@ internal static class MappingExtensions
                     number: seat.Number,
                     type: seat.Type.ToEntity()))))
         );
+
+    internal static Screen ToEntity(this ScreenUpdateRequest request, IEnumerable<Screen> entities)
+    {
+        var screen = entities.FirstOrDefault(screen => screen.Id == request.Id);
+
+        if (screen is null)
+            return new Screen(request.Name, request.Seats.Select(seat => new Seat(
+                row: seat.Row,
+                number: seat.Number,
+                type: seat.Type.ToEntity())));
+
+        screen.Update(request.Name, request.Seats.Select(seat => seat.ToEntity(screen.Seats)));
+        return screen;
+    }
+
+    private static Seat ToEntity(this SeatUpdateRequest request, IEnumerable<Seat> entities)
+    {
+        var seat = entities.FirstOrDefault(seat => seat.Id == request.Id);
+
+        if (seat is null)
+            return new Seat(request.Row, request.Number, request.Type.ToEntity());
+
+        seat.Update(request.Row, request.Number, request.Type.ToEntity());
+        return seat;
+    }
 
     private static SeatTypeDto ToDto(this SeatType type)
         => type switch

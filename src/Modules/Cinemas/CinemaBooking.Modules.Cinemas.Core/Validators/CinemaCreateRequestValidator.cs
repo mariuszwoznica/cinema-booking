@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace CinemaBooking.Modules.Cinemas.Core.Validators;
 
-internal class CinemaRequestValidator : AbstractValidator<CinemaRequest>
+internal class CinemaCreateRequestValidator : AbstractValidator<CinemaCreateRequest>
 {
-    public CinemaRequestValidator()
+    public CinemaCreateRequestValidator()
     {
         RuleFor(c => c.Name)
             .NotEmpty()
@@ -18,7 +18,7 @@ internal class CinemaRequestValidator : AbstractValidator<CinemaRequest>
         RuleFor(c => c.Address)
             .NotEmpty()
             .WithMessage("Address is required.");
-        
+
         RuleFor(c => c.Address)
             .NotEmpty()
             .SetValidator(new AddressDtoValidator());

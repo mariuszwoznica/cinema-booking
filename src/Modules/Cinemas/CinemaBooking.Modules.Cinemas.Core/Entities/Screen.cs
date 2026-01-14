@@ -18,4 +18,10 @@ internal class Screen : Entity
         Name = name;
         Seats = seats.ToList();
     }
+    
+    internal void Update(string name, IEnumerable<Seat> seats)
+    {
+        Name = name;
+        Seats = seats.ToList();
+    }
 }

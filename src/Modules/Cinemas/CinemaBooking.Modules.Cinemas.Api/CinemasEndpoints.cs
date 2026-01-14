@@ -18,10 +18,10 @@ public static class CinemasEndpoints
             .WithName(nameof(GetCinema));
 
         endpoints.MapPost("/", CreateCinema)
-            .WithRequestValidation<CinemaRequest>();
+            .WithRequestValidation<CinemaCreateRequest>();
 
         endpoints.MapPut("/{cinemaId:guid}", UpdateCinema)
-            .WithRequestValidation<CinemaRequest>();
+            .WithRequestValidation<CinemaUpdateRequest>();
 
         endpoints.MapDelete("/{cinemaId:guid}", DeleteCinema);
     }
@@ -38,7 +38,7 @@ public static class CinemasEndpoints
     }
 
     private static async Task<IResult> CreateCinema(
-        CinemaRequest request,
+        CinemaCreateRequest request,
         ICinemaService cinemaService,
         CancellationToken cancellationToken)
     {
@@ -50,8 +50,8 @@ public static class CinemasEndpoints
     }
 
     private static async Task<NoContent> UpdateCinema(
-        Guid cinemaId, //TODO: use or remove
-        CinemaRequest request,
+        Guid cinemaId,
+        CinemaUpdateRequest request,
         ICinemaService cinemaService,
         CancellationToken cancellationToken)
     {

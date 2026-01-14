@@ -11,7 +11,7 @@ internal class CinemaService(ICinemaRepository repository) : ICinemaService
         return cinema.ToDto();
     }
 
-    public async Task<CinemaDto> CreateAsync(CinemaRequest request, CancellationToken cancellationToken)
+    public async Task<CinemaDto> CreateAsync(CinemaCreateRequest request, CancellationToken cancellationToken)
     {
         var cinemaExists = await repository.ExistsAsync(request.Name, cancellationToken);
         if (cinemaExists)
@@ -24,12 +24,16 @@ internal class CinemaService(ICinemaRepository repository) : ICinemaService
         return cinema.ToDto();
     }
 
-    public async Task UpdateAsync(Guid id, CinemaRequest request, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Guid id, CinemaUpdateRequest request, CancellationToken cancellationToken)
     {
         var cinema = await repository.GetByIdAsync(id, cancellationToken);
-        
-        //TODO: call update method from entity class
-        await repository.UpdateAsync(request.ToEntity(), cancellationToken);
+
+        cinema.Update(
+            name: request.Name,
+            address: request.Address.ToEntity(),
+            screens: request.Screens.Select(screen => screen.ToEntity(cinema.Screens)).ToList());
+
+        await repository.UpdateAsync(cinema, cancellationToken);
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)

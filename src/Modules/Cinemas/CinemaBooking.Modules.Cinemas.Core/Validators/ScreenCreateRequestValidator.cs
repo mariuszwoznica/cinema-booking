@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace CinemaBooking.Modules.Cinemas.Core.Validators;
 
-internal class ScreenRequestValidator : AbstractValidator<ScreenRequest>
+internal class ScreenCreateRequestValidator : AbstractValidator<ScreenCreateRequest>
 {
-    public  ScreenRequestValidator()
+    public  ScreenCreateRequestValidator()
     {
         RuleFor(s => s.Name)
             .NotEmpty()
@@ -14,6 +14,6 @@ internal class ScreenRequestValidator : AbstractValidator<ScreenRequest>
         RuleForEach(s => s.Seats)
             .NotEmpty()
             .WithMessage("Seats are required.")
-            .SetValidator(new SeatRequestValidator());
+            .SetValidator(new SeatCreateRequestValidator());
     }
 }

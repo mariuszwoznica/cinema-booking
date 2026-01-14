@@ -20,4 +20,11 @@ internal class Cinema : Entity
         Address = address;
         Screens = screens.ToList();
     }
+
+    internal void Update(string name, Address address, IEnumerable<Screen> screens)
+    {
+        Name = name;
+        Address = address;
+        Screens = screens.ToList();
+    }
 }

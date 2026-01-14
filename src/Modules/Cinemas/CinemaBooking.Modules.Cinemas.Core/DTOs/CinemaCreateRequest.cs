@@ -1,6 +1,6 @@
 ﻿namespace CinemaBooking.Modules.Cinemas.Core.DTOs;
 
-public record CinemaRequest(
+public record CinemaCreateRequest(
     string Name,
     AddressDto Address,
-    IEnumerable<ScreenRequest>? Screens);
+    IEnumerable<ScreenCreateRequest>? Screens);

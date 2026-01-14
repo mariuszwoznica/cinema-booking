@@ -15,6 +15,13 @@ internal class Seat : Entity
         Number = number;
         Type = type;
     }
+    
+    internal void Update(string row, int number, SeatType type)
+    {
+        Row = row;
+        Number = number;
+        Type = type;
+    }
 }
 
 internal enum SeatType
