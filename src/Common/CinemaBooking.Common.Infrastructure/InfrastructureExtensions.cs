@@ -16,6 +16,8 @@ public static class InfrastructureExtensions
         IConfiguration configuration, IList<Assembly> assemblies)
     {
         services
+            .AddProblemDetails()
+            .AddExceptionHandler<GlobalExceptionHandler>()
             .AddFluentValidation(assemblies)
             .AddCommands(assemblies)
             .AddQueries(assemblies)
@@ -27,6 +29,7 @@ public static class InfrastructureExtensions
 
     public static IApplicationBuilder UseCommonInfrastructure(this IApplicationBuilder app)
     {
+        app.UseExceptionHandler();
         app.UseSwaggerUI(options =>
         {
             options.SwaggerEndpoint("/openapi/v1.json", "CinemaBooking API");
