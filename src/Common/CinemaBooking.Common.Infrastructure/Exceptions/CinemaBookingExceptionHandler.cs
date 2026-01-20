@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using CinemaBooking.Common.Abstractions.Exceptions;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CinemaBooking.Common.Infrastructure;
+namespace CinemaBooking.Common.Infrastructure.Exceptions;
 
-public class GlobalExceptionHandler(
+internal sealed class CinemaBookingExceptionHandler(
     IProblemDetailsService problemDetailsService, 
     ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
@@ -14,7 +15,12 @@ public class GlobalExceptionHandler(
         Exception exception, 
         CancellationToken cancellationToken)
     {
-        logger.LogError(exception, "An unhandled exception occurred.");
+        if (exception is not CinemaBookingException)
+        {
+            return false;
+        }
+        
+        logger.LogError(exception, "Domain exception occurred.");
         
         return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
         {
@@ -22,9 +28,9 @@ public class GlobalExceptionHandler(
             Exception = exception,
             ProblemDetails = new ProblemDetails
             {
-                Status = StatusCodes.Status500InternalServerError,
+                Status = StatusCodes.Status400BadRequest,
                 Type = exception.GetType().Name,
-                Title = "An unhandled error occurred",
+                Title = "Domain exception occurred",
                 Detail = exception.Message,
             }
         });
