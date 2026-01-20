@@ -15,15 +15,19 @@ public static class CinemasEndpoints
         var endpoints = app.MapGroup("/cinemas");
 
         endpoints.MapGet("/{cinemaId:guid}", GetCinema)
+            .WithSummary("Gets a Cinema")
             .WithName(nameof(GetCinema));
 
         endpoints.MapPost("/", CreateCinema)
+            .WithSummary("Creates a new cinema")
             .WithRequestValidation<CinemaCreateRequest>();
 
         endpoints.MapPut("/{cinemaId:guid}", UpdateCinema)
+            .WithSummary("Updates a cinema")
             .WithRequestValidation<CinemaUpdateRequest>();
 
-        endpoints.MapDelete("/{cinemaId:guid}", DeleteCinema);
+        endpoints.MapDelete("/{cinemaId:guid}", DeleteCinema)
+            .WithSummary("Deletes a cinema");
     }
 
     private static async Task<Results<Ok<CinemaDto>, NotFound>> GetCinema(
