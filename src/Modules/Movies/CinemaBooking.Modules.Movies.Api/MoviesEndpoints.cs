@@ -21,6 +21,10 @@ public static class MoviesEndpoints
         endpoints.MapPost("/", CreateMovie)
             .WithSummary("Creates a new movie")
             .WithRequestValidation<MovieCreateRequest>();
+        
+        endpoints.MapPut("/{movieId:guid}", UpdateMovie)
+            .WithSummary("Updates a movie")
+            .WithRequestValidation<MovieUpdateRequest>();
 
         endpoints.MapDelete("/{movieId:guid}", DeleteMovie)
             .WithSummary("Deletes a movie");
@@ -47,6 +51,16 @@ public static class MoviesEndpoints
             routeName: nameof(GetMovie),
             routeValues: new { movieId = response.Id },
             value: response);
+    }
+    
+    private static async Task<NoContent> UpdateMovie(
+        Guid movieId,
+        MovieUpdateRequest request,
+        IMovieService movieService,
+        CancellationToken cancellationToken)
+    {
+        await movieService.UpdateAsync(movieId, request, cancellationToken);
+        return TypedResults.NoContent();
     }
     
     private static async Task<NoContent> DeleteMovie(
