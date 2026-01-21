@@ -4,6 +4,11 @@ namespace CinemaBooking.Modules.Movies.Core.Services;
 
 public class MovieService : IMovieService
 {
+    public Task<MovieDto> GetAsync(Guid id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<MovieDto> CreateAsync(MovieCreateRequest request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();

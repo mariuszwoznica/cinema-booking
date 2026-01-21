@@ -3,6 +3,7 @@ using CinemaBooking.Modules.Movies.Core.DTOs;
 using CinemaBooking.Modules.Movies.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
 
 namespace CinemaBooking.Modules.Movies.Api;
@@ -13,9 +14,24 @@ public static class MoviesEndpoints
     {
         var endpoints = app.MapGroup("/movies");
 
+        endpoints.MapGet("/{movieId:guid}", GetMovie)
+            .WithSummary("Gets a movie")
+            .WithName(nameof(GetMovie));
+
         endpoints.MapPost("/", CreateMovie)
             .WithSummary("Creates a new movie")
             .WithRequestValidation<MovieCreateRequest>();
+    }
+    
+    private static async Task<Results<Ok<MovieDto>, NotFound>> GetMovie(
+        Guid movieId,
+        IMovieService movieService,
+        CancellationToken cancellationToken)
+    {
+        var movie = await movieService.GetAsync(movieId, cancellationToken);
+        return movie is null
+            ? TypedResults.NotFound()
+            : TypedResults.Ok(movie);
     }
     
     private static async Task<IResult> CreateMovie(
@@ -25,7 +41,7 @@ public static class MoviesEndpoints
     {
         var response = await movieService.CreateAsync(request, cancellationToken);
         return TypedResults.CreatedAtRoute(
-            //routeName: nameof(GetMovie),
+            routeName: nameof(GetMovie),
             routeValues: new { movieId = response.Id },
             value: response);
     }
