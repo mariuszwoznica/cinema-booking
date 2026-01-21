@@ -6,4 +6,5 @@ public interface IMovieService
 {
     Task<MovieDto> GetAsync(Guid id,  CancellationToken cancellationToken);
     Task<MovieDto> CreateAsync(MovieCreateRequest request, CancellationToken cancellationToken);
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

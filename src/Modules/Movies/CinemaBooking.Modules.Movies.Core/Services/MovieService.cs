@@ -13,4 +13,9 @@ public class MovieService : IMovieService
     {
         throw new NotImplementedException();
     }
+
+    public Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }
