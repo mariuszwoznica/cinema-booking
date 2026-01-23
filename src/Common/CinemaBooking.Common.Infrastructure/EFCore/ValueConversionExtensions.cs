@@ -8,7 +8,13 @@ namespace CinemaBooking.Common.Infrastructure.EFCore;
 
 public static class ValueConversionExtensions
 {
-    public static PropertyBuilder<ICollection<TEnum>> HasJsonbConversion<TEnum>(
+    /// <summary>
+    /// Configures a collection of enum values to be stored as a <c>jsonb</c> column.
+    /// </summary>
+    /// <typeparam name="TEnum">The enum type in the collection</typeparam>
+    /// <param name="builder">The property builder</param>
+    /// <returns>The <see cref="PropertyBuilder{TProperty}"/> for further configuration.</returns>
+    public static PropertyBuilder<ICollection<TEnum>> HasJsonbEnumCollectionConversion<TEnum>(
         this PropertyBuilder<ICollection<TEnum>> builder) where TEnum : Enum
     {
         var converter = new ValueConverter<ICollection<TEnum>, string>
