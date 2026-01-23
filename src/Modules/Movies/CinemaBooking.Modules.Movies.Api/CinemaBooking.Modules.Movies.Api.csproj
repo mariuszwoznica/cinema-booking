@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CinemaBooking.Modules.Movies.Core\CinemaBooking.Modules.Movies.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,44 @@
+﻿using CinemaBooking.Modules.Movies.Core.DTOs;
+
+namespace CinemaBooking.Modules.Movies.Core.Services;
+
+internal class MovieService(IMovieRepository repository) : IMovieService
+{
+    public async Task<MovieDto> GetAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var movie = await repository.GetByIdAsync(id, cancellationToken);
+        return movie.ToDto();
+    }
+
+    public async Task<MovieDto> CreateAsync(MovieCreateRequest request, CancellationToken cancellationToken)
+    {
+        //movie uniqueness
+
+        var movie = request.ToEntity();
+        await repository.CreateAsync(movie, cancellationToken);
+        return movie.ToDto();
+    }
+
+    public async Task UpdateAsync(Guid id, MovieUpdateRequest request, CancellationToken cancellationToken)
+    {
+        var movie = await repository.GetByIdAsync(id, cancellationToken);
+
+        movie.Update(
+            title: request.Title,
+            description: request.Description,
+            length: request.Length,
+            releaseDate: request.ReleaseDate,
+            genres: request.Genres.Select(genre => genre.ToEntity()),
+            ageRestriction: request.AgeRestriction,
+            directors: request.Directors.Select(director => director.ToEntity()),
+            cast: request.Cast.Select(cast => cast.ToEntity()));
+
+        await repository.UpdateAsync(movie, cancellationToken);
+    }
+
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var movie = await repository.GetByIdAsync(id, cancellationToken);
+        await repository.DeleteAsync(movie, cancellationToken);
+    }
+}
