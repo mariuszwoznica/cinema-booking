@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -7,8 +8,8 @@ namespace CinemaBooking.Common.Infrastructure.EFCore;
 
 public static class ValueConversionExtensions
 {
-    public static PropertyBuilder<ICollection<TEnum>> EnumCollectionJsonConversion<TEnum>(
-        PropertyBuilder<ICollection<TEnum>> builder) where TEnum : Enum
+    public static PropertyBuilder<ICollection<TEnum>> HasJsonbConversion<TEnum>(
+        this PropertyBuilder<ICollection<TEnum>> builder) where TEnum : Enum
     {
         var converter = new ValueConverter<ICollection<TEnum>, string>
         (
@@ -23,9 +24,10 @@ public static class ValueConversionExtensions
         (
             (l, r) => l.SequenceEqual(r),
             v => v.Aggregate(0, (a, e) => HashCode.Combine(a, e.GetHashCode())),
-            v => (ICollection<TEnum>)v.ToList()
+            v => v.ToList()
         );
 
+        builder.HasColumnType("jsonb");
         builder.HasConversion(converter);
         builder.Metadata.SetValueComparer(comparer);
 
