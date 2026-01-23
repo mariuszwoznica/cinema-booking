@@ -1,4 +1,5 @@
-﻿using CinemaBooking.Modules.Movies.Core.Entities;
+﻿using CinemaBooking.Common.Infrastructure.EFCore;
+using CinemaBooking.Modules.Movies.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +12,7 @@ internal class MovieConfiguration : IEntityTypeConfiguration<Movie>
         builder.ToTable("movies");
 
         builder.HasKey(m => m.Id);
-        
+
         builder.Property(m => m.Id)
             .ValueGeneratedNever()
             .IsRequired();
@@ -21,8 +22,8 @@ internal class MovieConfiguration : IEntityTypeConfiguration<Movie>
         builder.Property(m => m.Length).IsRequired();
         builder.Property(m => m.ReleaseDate).IsRequired();
         builder.Property(m => m.AgeRestriction).IsRequired();
+        builder.Property(m => m.Genres).HasJsonbEnumCollectionConversion();
 
-        builder.ComplexCollection(m => m.Genres, genres => genres.ToJson());
         builder.ComplexCollection(m => m.Directors, directors => directors.ToJson());
         builder.ComplexCollection(m => m.Cast, cast => cast.ToJson());
     }

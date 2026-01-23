@@ -8,7 +8,7 @@ internal class Movie : Entity
     public string Description { get; private set; }
     public int Length { get; private set; }
     public DateTime ReleaseDate { get; private set; }
-    public List<Genre> Genres { get; private set; }
+    public ICollection<Genre> Genres { get; private set; }
     public int AgeRestriction { get; private set; }
     public List<Person> Directors { get; private set; }
     public List<Person> Cast { get; private set; }
