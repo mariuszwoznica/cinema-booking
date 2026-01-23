@@ -2,25 +2,43 @@
 
 namespace CinemaBooking.Modules.Movies.Core.Services;
 
-public class MovieService : IMovieService
+internal class MovieService(IMovieRepository repository) : IMovieService
 {
-    public Task<MovieDto> GetAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<MovieDto> GetAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var movie = await repository.GetByIdAsync(id, cancellationToken);
+        return movie.ToDto();
     }
 
-    public Task<MovieDto> CreateAsync(MovieCreateRequest request, CancellationToken cancellationToken)
+    public async Task<MovieDto> CreateAsync(MovieCreateRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        //movie uniqueness
+
+        var movie = request.ToEntity();
+        await repository.CreateAsync(movie, cancellationToken);
+        return movie.ToDto();
     }
 
-    public Task UpdateAsync(Guid id, MovieUpdateRequest request, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Guid id, MovieUpdateRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var movie = await repository.GetByIdAsync(id, cancellationToken);
+
+        movie.Update(
+            title: request.Title,
+            description: request.Description,
+            length: request.Length,
+            releaseDate: request.ReleaseDate,
+            genres: request.Genres.Select(genre => genre.ToEntity()),
+            ageRestriction: request.AgeRestriction,
+            directors: request.Directors.Select(director => director.ToEntity()),
+            cast: request.Cast.Select(cast => cast.ToEntity()));
+
+        await repository.UpdateAsync(movie, cancellationToken);
     }
 
-    public Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var movie = await repository.GetByIdAsync(id, cancellationToken);
+        await repository.DeleteAsync(movie, cancellationToken);
     }
 }

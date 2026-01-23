@@ -13,10 +13,28 @@ internal class Movie : Entity
     public List<Person> Directors { get; private set; }
     public List<Person> Cast { get; private set; }
 
-    internal Movie(string  title, string description, int length, DateTime releaseDate, 
+    //Only for Ef purpose
+    public Movie()
+    {
+    }
+
+    internal Movie(string title, string description, int length, DateTime releaseDate,
         IEnumerable<Genre> genres, int ageRestriction, IEnumerable<Person> directors, IEnumerable<Person> cast)
     {
         Id = Guid.NewGuid();
+        Title = title;
+        Description = description;
+        Length = length;
+        ReleaseDate = releaseDate;
+        Genres = genres.ToList();
+        AgeRestriction = ageRestriction;
+        Directors = directors.ToList();
+        Cast = cast.ToList();
+    }
+
+    internal void Update(string title, string description, int length, DateTime releaseDate,
+        IEnumerable<Genre> genres, int ageRestriction, IEnumerable<Person> directors, IEnumerable<Person> cast)
+    {
         Title = title;
         Description = description;
         Length = length;
