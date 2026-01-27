@@ -1,4 +1,5 @@
 ﻿using CinemaBooking.Modules.Movies.Core.DTOs;
+using CinemaBooking.Modules.Movies.Core.Exceptions;
 
 namespace CinemaBooking.Modules.Movies.Core.Services;
 
@@ -19,7 +20,12 @@ internal class MovieService(IMovieRepository repository) : IMovieService
 
     public async Task<MovieDto> CreateAsync(MovieCreateRequest request, CancellationToken cancellationToken)
     {
-        //TODO: movie uniqueness
+        var directors = request.Directors.Select(d => d.ToEntity()).ToList();
+        var movieExists = await repository.ExistsAsync(request.Title, directors, cancellationToken);
+        if (movieExists)
+        {
+            throw MovieAlreadyExistsException.Create(request.Title, directors);
+        }
 
         var movie = request.ToEntity();
         await repository.CreateAsync(movie, cancellationToken);

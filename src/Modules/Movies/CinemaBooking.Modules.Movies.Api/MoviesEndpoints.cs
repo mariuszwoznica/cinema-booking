@@ -39,9 +39,7 @@ public static class MoviesEndpoints
         CancellationToken cancellationToken)
     {
         var movie = await movieService.GetAsync(movieId, cancellationToken);
-        return movie is null
-            ? TypedResults.NotFound()
-            : TypedResults.Ok(movie);
+        return TypedResults.Ok(movie);
     }
 
     private static async Task<Ok<IReadOnlyCollection<MovieDto>>> GetMovies(
