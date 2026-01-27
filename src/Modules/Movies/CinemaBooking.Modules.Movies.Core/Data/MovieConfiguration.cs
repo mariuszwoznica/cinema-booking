@@ -7,9 +7,15 @@ namespace CinemaBooking.Modules.Movies.Core.Data;
 
 internal class MovieConfiguration : IEntityTypeConfiguration<Movie>
 {
+    private const string Config = "simple";
+    
     public void Configure(EntityTypeBuilder<Movie> builder)
     {
         builder.ToTable("movies");
+
+        builder.HasIndex(m => new { m.Title })
+            .HasMethod("GIN")
+            .IsTsVectorExpressionIndex(Config);
 
         builder.HasKey(m => m.Id);
 

@@ -18,6 +18,9 @@ public static class MoviesEndpoints
             .WithSummary("Gets a movie")
             .WithName(nameof(GetMovie));
 
+        endpoints.MapGet("/", GetMovies)
+            .WithSummary("Gets movies matched a search phrase");
+
         endpoints.MapPost("/", CreateMovie)
             .WithSummary("Creates a new movie")
             .WithRequestValidation<MovieCreateRequest>();
@@ -36,9 +39,16 @@ public static class MoviesEndpoints
         CancellationToken cancellationToken)
     {
         var movie = await movieService.GetAsync(movieId, cancellationToken);
-        return movie is null
-            ? TypedResults.NotFound()
-            : TypedResults.Ok(movie);
+        return TypedResults.Ok(movie);
+    }
+
+    private static async Task<Ok<IReadOnlyCollection<MovieDto>>> GetMovies(
+        string searchPhrase,
+        IMovieService movieService,
+        CancellationToken cancellationToken)
+    {
+        var movies = await movieService.GetBySearchPhraseAsync(searchPhrase, cancellationToken);
+        return TypedResults.Ok(movies);
     }
     
     private static async Task<IResult> CreateMovie(

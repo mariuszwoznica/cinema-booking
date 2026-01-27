@@ -1,4 +1,5 @@
-﻿using CinemaBooking.Modules.Movies.Core.Entities;
+﻿using CinemaBooking.Modules.Movies.Core.DTOs;
+using CinemaBooking.Modules.Movies.Core.Entities;
 using CinemaBooking.Modules.Movies.Core.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,11 +7,31 @@ namespace CinemaBooking.Modules.Movies.Core.Data;
 
 internal class MovieRepository(MoviesDbContext context) : IMovieRepository
 {
+    private const string Config = "simple";
+
     public async Task<Movie> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         => await context.Movies
                .AsNoTracking()
                .SingleOrDefaultAsync(m => m.Id == id, cancellationToken)
            ?? throw new MovieNotFoundException(id);
+
+    public async Task<bool> ExistsAsync(string title, IEnumerable<Person> directors,
+        CancellationToken cancellationToken)
+        => await context.Movies
+            .AnyAsync(m =>
+                m.Title == title
+                && m.Directors.Count == directors.Count()
+                && m.Directors.All(d =>
+                    m.Directors.Any(x =>
+                        x.FirstName == d.FirstName
+                        && x.LastName == d.LastName)), cancellationToken);
+
+    public async Task<IReadOnlyCollection<Movie>> GetListAsync(string searchPhrase, CancellationToken cancellationToken)
+        => await context.Movies
+            .Where(m => EF.Functions.ToTsVector(Config, m.Title)
+                .Matches(EF.Functions.PhraseToTsQuery(Config, searchPhrase)))
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
 
     public async Task CreateAsync(Movie movie, CancellationToken cancellationToken)
     {
