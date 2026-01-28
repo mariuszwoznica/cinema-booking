@@ -36,9 +36,7 @@ public static class CinemasEndpoints
         CancellationToken cancellationToken)
     {
         var cinema = await cinemaService.GetAsync(cinemaId, cancellationToken);
-        return cinema is null
-            ? TypedResults.NotFound()
-            : TypedResults.Ok(cinema);
+        return TypedResults.Ok(cinema);
     }
 
     private static async Task<IResult> CreateCinema(
