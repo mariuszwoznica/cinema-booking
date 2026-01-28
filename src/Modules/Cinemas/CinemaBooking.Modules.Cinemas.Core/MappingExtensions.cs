@@ -48,12 +48,13 @@ internal static class MappingExtensions
     internal static Screen ToEntity(this ScreenUpdateRequest request, IEnumerable<Screen> entities)
     {
         var screen = entities.FirstOrDefault(screen => screen.Id == request.Id);
-
         if (screen is null)
+        {
             return new Screen(request.Name, request.Seats.Select(seat => new Seat(
                 row: seat.Row,
                 number: seat.Number,
                 type: seat.Type.ToEntity())));
+        }
 
         screen.Update(request.Name, request.Seats.Select(seat => seat.ToEntity(screen.Seats)));
         return screen;
@@ -62,9 +63,10 @@ internal static class MappingExtensions
     private static Seat ToEntity(this SeatUpdateRequest request, IEnumerable<Seat> entities)
     {
         var seat = entities.FirstOrDefault(seat => seat.Id == request.Id);
-
         if (seat is null)
+        {
             return new Seat(request.Row, request.Number, request.Type.ToEntity());
+        }
 
         seat.Update(request.Row, request.Number, request.Type.ToEntity());
         return seat;
@@ -76,7 +78,7 @@ internal static class MappingExtensions
             SeatType.Saver => SeatTypeDto.Saver,
             SeatType.Standard => SeatTypeDto.Standard,
             SeatType.Vip => SeatTypeDto.Vip,
-            _ => throw new SeatTypeNotSupportedException(type.ToString())
+            _ => throw SeatTypeNotSupportedException.Create(type)
         };
 
     private static SeatType ToEntity(this SeatTypeDto type)
@@ -85,6 +87,6 @@ internal static class MappingExtensions
             SeatTypeDto.Saver => SeatType.Saver,
             SeatTypeDto.Standard => SeatType.Standard,
             SeatTypeDto.Vip => SeatType.Vip,
-            _ => throw new SeatTypeNotSupportedException(type.ToString())
+            _ => throw SeatTypeNotSupportedException.Create(type)
         };
 }

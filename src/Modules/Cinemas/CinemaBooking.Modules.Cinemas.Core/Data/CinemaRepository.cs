@@ -6,10 +6,9 @@ namespace CinemaBooking.Modules.Cinemas.Core.Data;
 
 internal class CinemaRepository(CinemasDbContext context) : ICinemaRepository
 {
-    public async Task<bool> ExistsAsync(string name, CancellationToken cancellationToken)
-        => await context.Cinemas
-            .AsNoTracking()
-            .AnyAsync(c => c.Name == name, cancellationToken);
+    public Task<bool> ExistsAsync(string name, CancellationToken cancellationToken)
+        => context.Cinemas
+            .AnyAsync(c => c.Name.ToLower() == name.ToLower(), cancellationToken);
 
     public async Task<Cinema> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         => await context.Cinemas
